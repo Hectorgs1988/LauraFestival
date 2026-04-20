@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<header class="site-header" id="top">
+		<div class="brand">Laura Sound Festival 40</div>
+
+		<button
+			class="menu-toggle"
+			id="menuToggle"
+			aria-expanded="false"
+			aria-controls="mainNav"
+			aria-label="Abrir menu"
+		>
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+
+		<nav class="main-nav" id="mainNav">
+			<a href="#programa">Programa</a>
+			<a href="#como-llegar">Como llegar</a>
+			<a href="#buses">Buses ida y vuelta</a>
+			<a href="#horarios">Horarios</a>
+			<a href="#confirmar">Confirmar asistencia</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero section" aria-labelledby="hero-title">
+			<div class="hero-glow hero-glow-left" aria-hidden="true"></div>
+			<div class="hero-glow hero-glow-right" aria-hidden="true"></div>
+
+			<p class="eyebrow">5 Septiembre 2026 · Susinos del Paramo</p>
+			<h1 id="hero-title">Save the Date · 40 anos de Laura</h1>
+			<p class="hero-copy">
+				Una celebracion con sonido festivalero, buen rollo y mucha pista.
+			</p>
+			<a class="cta" href="#confirmar">Confirmar asistencia</a>
+		</section>
+
+		<section class="section" id="programa">
+			<h2>Programa</h2>
+			<div class="grid cards-3">
+				<article class="card">
+					<h3>Apertura</h3>
+					<p>Bienvenida, brindis y foto grupal para arrancar la tarde.</p>
+				</article>
+				<article class="card">
+					<h3>Festival Set</h3>
+					<p>Musica, baile y sorpresas con tematica Laura Sound Festival.</p>
+				</article>
+				<article class="card">
+					<h3>Cierre</h3>
+					<p>Tarta, velas y ultimo baile para terminar por todo lo alto.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="section" id="como-llegar">
+			<h2>Como llegar</h2>
+			<div class="card split">
+				<div>
+					<p>
+						El evento se celebra en <strong>Susinos del Paramo</strong>. Puedes llegar
+						en coche compartido o en los buses organizados.
+					</p>
+					<ul>
+						<li>Punto de encuentro principal: por definir</li>
+						<li>Aparcamiento: por definir</li>
+						<li>Ubicacion exacta: por compartir en breve</li>
+					</ul>
+				</div>
+				<figure class="map-placeholder" aria-label="Mapa de ubicacion">
+					Mapa / enlace de ubicacion
+				</figure>
+			</div>
+		</section>
+
+		<section class="section" id="buses">
+			<h2>Buses ida y vuelta</h2>
+			<div class="grid cards-2">
+				<article class="card">
+					<h3>Bus de ida</h3>
+					<p>Salida desde ciudad (punto por confirmar).</p>
+					<p>Hora estimada: 16:30</p>
+				</article>
+				<article class="card">
+					<h3>Bus de vuelta</h3>
+					<p>Regreso desde la finca al finalizar la celebracion.</p>
+					<p>Hora estimada: 03:00</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="section" id="horarios">
+			<h2>Horarios</h2>
+			<div class="card">
+				<ol class="timeline">
+					<li><span>17:00</span> Apertura de puertas</li>
+					<li><span>18:30</span> Sesion principal y actividades</li>
+					<li><span>21:30</span> Cena</li>
+					<li><span>23:30</span> Fiesta</li>
+					<li><span>02:30</span> Cierre</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="section" id="confirmar">
+			<h2>Confirmar asistencia</h2>
+			<form class="card form" action="#" method="post">
+				<label for="nombre">Nombre</label>
+				<input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+
+				<label for="email">Email</label>
+				<input id="email" name="email" type="email" placeholder="tu@email.com" required />
+
+				<label for="asistencia">Asistencia</label>
+				<select id="asistencia" name="asistencia" required>
+					<option value="" selected disabled>Selecciona una opcion</option>
+					<option value="si">Si, voy</option>
+					<option value="no">No puedo ir</option>
+					<option value="duda">Aun no lo se</option>
+				</select>
+
+				<label for="bus">Bus</label>
+				<select id="bus" name="bus">
+					<option value="ninguno" selected>No necesito bus</option>
+					<option value="ida">Solo ida</option>
+					<option value="vuelta">Solo vuelta</option>
+					<option value="ida-vuelta">Ida y vuelta</option>
+				</select>
+
+				<button type="submit">Enviar</button>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<p>Laura Sound Festival 40 · 5 Sept 2026</p>
+		<a href="#top">Volver arriba</a>
+	</footer>
+</Layout>
+
+<script>
+	const menuToggle = document.getElementById('menuToggle');
+	const mainNav = document.getElementById('mainNav');
+	const navLinks = Array.from(document.querySelectorAll('.main-nav a'));
+	const sections = navLinks
+		.map((link) => link.getAttribute('href'))
+		.filter((href): href is string => Boolean(href))
+		.map((href) => document.querySelector(href))
+		.filter((section): section is Element => section !== null);
+
+	function closeMenu() {
+		if (!mainNav?.classList.contains('is-open')) {
+			return;
+		}
+
+		mainNav.classList.remove('is-open');
+		menuToggle?.setAttribute('aria-expanded', 'false');
+	}
+
+	menuToggle?.addEventListener('click', () => {
+		const isOpen = mainNav?.classList.toggle('is-open');
+		menuToggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+	});
+
+	navLinks.forEach((link) => {
+		link.addEventListener('click', () => {
+			closeMenu();
+		});
+	});
+
+	document.addEventListener('click', (event) => {
+		const target = event.target;
+		if (target instanceof Node && mainNav && menuToggle) {
+			if (!mainNav.contains(target) && !menuToggle.contains(target)) {
+				closeMenu();
+			}
+		}
+	});
+
+	window.addEventListener('resize', () => {
+		if (window.innerWidth > 780) {
+			mainNav?.classList.remove('is-open');
+			menuToggle?.setAttribute('aria-expanded', 'false');
+		}
+	});
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) {
+					return;
+				}
+
+				const activeId = `#${entry.target.id}`;
+				navLinks.forEach((link) => {
+					const isActive = link.getAttribute('href') === activeId;
+					link.classList.toggle('active', isActive);
+				});
+			});
+		},
+		{
+			rootMargin: '-35% 0px -55% 0px',
+			threshold: 0.01,
+		},
+	);
+
+	sections.forEach((section) => observer.observe(section));
+</script>
