@@ -284,20 +284,32 @@ h2 {
 
 .map-placeholder {
 	min-height: 190px;
-	border: 2px dashed #000;
+	border: 2px solid #000;
 	border-radius: 12px;
-	background:
-		linear-gradient(45deg, #f7f7f7 25%, transparent 25%),
-		linear-gradient(-45deg, #f7f7f7 25%, transparent 25%),
-		linear-gradient(45deg, transparent 75%, #f7f7f7 75%),
-		linear-gradient(-45deg, transparent 75%, #f7f7f7 75%);
-	background-size: 22px 22px;
-	background-position: 0 0, 0 11px, 11px -11px, -11px 0;
-	display: grid;
-	place-items: center;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
 	text-align: center;
-	padding: 1rem;
+	overflow: hidden;
 	font-weight: 800;
+}
+
+.map-placeholder iframe {
+	width: 100%;
+	min-height: 250px;
+	border: 0;
+	display: block;
+}
+
+.map-placeholder figcaption {
+	padding: 0.55rem 0.75rem;
+	border-top: 2px solid #000;
+	background: #fff8e6;
+}
+
+.map-placeholder figcaption a {
+	color: #000;
+	font-weight: 900;
 }
 
 .timeline {
@@ -347,6 +359,23 @@ button[type="submit"] {
 	font-weight: 900;
 	cursor: pointer;
 	box-shadow: 4px 4px 0 #000;
+}
+
+.form-status {
+	margin: 0.25rem 0 0;
+	padding: 0.6rem 0.75rem;
+	border: 2px solid #000;
+	border-radius: 10px;
+	font-weight: 800;
+	background: #fff;
+}
+
+.form-status.is-success {
+	background: #d8ffd8;
+}
+
+.form-status.is-error {
+	background: #ffd9d9;
 }
 
 .site-footer {
