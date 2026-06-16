@@ -133,7 +133,7 @@ import Layout from '../layouts/Layout.astro';
 
 		<section class="section" id="confirmar">
 			<h2>Confirmar asistencia</h2>
-			<form class="card form" action="https://formspree.io/f/mdavjjkr" method="POST">
+			<form class="card form" id="confirmForm" action="https://formspree.io/f/mdavjjkr" method="POST">
 				<label for="nombre">Nombre</label>
 				<input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
 
@@ -157,6 +157,7 @@ import Layout from '../layouts/Layout.astro';
 				</select>
 
 				<button type="submit">Enviar</button>
+				<p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
 			</form>
 		</section>
 	</main>
@@ -234,4 +235,59 @@ import Layout from '../layouts/Layout.astro';
 	);
 
 	sections.forEach((section) => observer.observe(section));
+
+	const confirmForm = document.getElementById('confirmForm');
+	const formStatus = document.getElementById('formStatus');
+
+	if (confirmForm instanceof HTMLFormElement && formStatus instanceof HTMLParagraphElement) {
+		confirmForm.addEventListener('submit', async (event) => {
+			event.preventDefault();
+
+			const submitButton = confirmForm.querySelector('button[type="submit"]');
+			if (!(submitButton instanceof HTMLButtonElement)) {
+				return;
+			}
+
+			submitButton.disabled = true;
+			submitButton.textContent = 'Enviando...';
+			formStatus.hidden = false;
+			formStatus.classList.remove('is-success', 'is-error');
+			formStatus.textContent = 'Enviando formulario...';
+
+			try {
+				const response = await fetch(confirmForm.action, {
+					method: 'POST',
+					body: new FormData(confirmForm),
+					headers: {
+						Accept: 'application/json',
+					},
+				});
+
+				if (response.ok) {
+					formStatus.classList.add('is-success');
+					formStatus.textContent = 'Gracias, tu confirmacion se ha enviado correctamente.';
+					confirmForm.reset();
+					return;
+				}
+
+				let errorMessage = 'No se pudo enviar el formulario. Intentalo de nuevo.';
+				const payload = (await response.json().catch(() => null)) as
+					| { errors?: Array<{ message?: string }> }
+					| null;
+				const firstError = payload?.errors?.[0]?.message;
+				if (firstError) {
+					errorMessage = firstError;
+				}
+
+				formStatus.classList.add('is-error');
+				formStatus.textContent = errorMessage;
+			} catch {
+				formStatus.classList.add('is-error');
+				formStatus.textContent = 'No hay conexion o hubo un error inesperado.';
+			} finally {
+				submitButton.disabled = false;
+				submitButton.textContent = 'Enviar';
+			}
+		});
+	}
 </script>
