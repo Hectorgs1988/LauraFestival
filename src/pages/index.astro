@@ -144,6 +144,17 @@ import Layout from '../layouts/Layout.astro';
 					<option value="duda">Aun no lo se</option>
 				</select>
 
+				<label for="asistentes">Numero de asistentes</label>
+				<input
+					id="asistentes"
+					name="asistentes"
+					type="number"
+					min="1"
+					step="1"
+					value="1"
+					required
+				/>
+
 				<label for="bus">Bus</label>
 				<select id="bus" name="bus">
 					<option value="ninguno" selected>No necesito bus</option>
