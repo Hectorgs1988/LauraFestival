@@ -23,6 +23,7 @@ import Layout from '../layouts/Layout.astro';
 			<a href="#como-llegar">Como llegar</a>
 			<a href="#buses">Buses ida y vuelta</a>
 			<a href="#horarios">Horarios</a>
+			<a href="#acampada">Zona de acampada</a>
 			<a href="#confirmar">Confirmar asistencia</a>
 		</nav>
 	</header>
@@ -71,13 +72,9 @@ import Layout from '../layouts/Layout.astro';
 				<div>
 					<p>
 						El evento se celebra en <strong>Susinos del Páramo, Burgos</strong>. Puedes llegar
-						en coche compartido o en los buses organizados.
+						en coche, coche compartido, bicicleta o en los buses organizados.
 					</p>
-					<ul>
-						<li>Punto de encuentro principal: por definir</li>
-						<li>Aparcamiento: por definir</li>
-						<li>Ubicacion exacta: Susinos del Páramo, Burgos</li>
-					</ul>
+					<br>
 					<a
 						class="cta"
 						href="https://www.google.com/maps/search/?api=1&query=Susinos+del+P%C3%A1ramo,+Burgos"
@@ -122,6 +119,14 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
+		<section class="section" id="acampada">
+			<h2>Zona de acampada</h2>
+			<div class="card">
+				<p>Habra zona de acampada habilitada durante el evento.</p>
+				<p>Proximamente compartiremos normas basicas y ubicacion exacta.</p>
+			</div>
+		</section>
+
 		<section class="section" id="confirmar">
 			<h2>Confirmar asistencia</h2>
 			<form class="card form" id="confirmForm" action="https://formspree.io/f/mdavjjkr" method="POST">
@@ -155,7 +160,6 @@ import Layout from '../layouts/Layout.astro';
 
 	<footer class="site-footer">
 		<p>Laura Sound Festival 40 · 5 Sept 2026</p>
-		<a href="#top">Volver arriba</a>
 	</footer>
 </Layout>
 
