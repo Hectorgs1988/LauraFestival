@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import portadaFestival from '../assets/portada-festival.jpg';
 ---
 
 <Layout>
@@ -29,16 +30,14 @@ import Layout from '../layouts/Layout.astro';
 	</header>
 
 	<main>
-		<section class="hero section" aria-labelledby="hero-title">
-			<div class="hero-glow hero-glow-left" aria-hidden="true"></div>
-			<div class="hero-glow hero-glow-right" aria-hidden="true"></div>
-
-			<p class="eyebrow">5 Septiembre 2026 · Susinos del Páramo, Burgos</p>
-			<h1 id="hero-title">Save the Date · Laura Sound Festival 40</h1>
-			<p class="hero-copy">
-				Una celebracion con sonido festivalero, buen rollo y mucha música.
-			</p>
-			<a class="cta" href="#confirmar">Confirmar asistencia</a>
+		<section class="hero section" aria-label="Portada Laura Sound Festival 40">
+			<img
+				class="hero-poster"
+				src={portadaFestival.src}
+				alt="Cartel Laura Sound Festival 40 con la fecha 5 de septiembre de 2026 en Susinos del Páramo"
+				loading="eager"
+				fetchpriority="high"
+			/>
 		</section>
 
 		<section class="section" id="programa">
