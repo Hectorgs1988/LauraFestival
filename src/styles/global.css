@@ -329,7 +329,7 @@ h2 {
 .form {
 	display: grid;
 	gap: 0.65rem;
-	max-width: 680px;
+	width: 100%;
 }
 
 label {
